@@ -1,18 +1,24 @@
 export default class FetchData {
-    startUrl = 'https://api.spacexdata.com/v4/';
-    getResource = async (url) => {
-        const res = await fetch(url);
+  
+  startUrl = 'https://api.spacexdata.com/v4/';
 
-        if(!res.ok){
-            throw new Error (`Something wrong ${res.status}`)
-        }
+  getResource = async url => {
+    const res = await fetch(url);
 
-        return await res.json();
+    if (!res.ok) {
+      throw new Error('Fetch error ' + res.status)
     }
 
-    getRocket = async () => await this.getResource(this.startUrl + 'rockets');
+    return await res.json();
+  };
 
-    getLaunches = async () => await this.getResource(this.startUrl + 'launches/past');
+  getRocket = async () => 
+    await this.getResource(this.startUrl + 'rockets');
 
-    getCompany = async () => await this.getResource(this.startUrl + 'company');
-};
+  getLaunches = async () => 
+    await this.getResource(this.startUrl + 'launches/past');
+
+  getCompany = async () => 
+    await this.getResource(this.startUrl + 'company');
+
+}
